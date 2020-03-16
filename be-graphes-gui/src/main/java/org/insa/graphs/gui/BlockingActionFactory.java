@@ -13,6 +13,7 @@ public class BlockingActionFactory {
     private ArrayList<RunningAction> actions = new ArrayList<>();
 
     // Parent component.
+    // commentaire innutile 
     private Component parentComponent;
 
     public BlockingActionFactory(Component parentComponent) {
