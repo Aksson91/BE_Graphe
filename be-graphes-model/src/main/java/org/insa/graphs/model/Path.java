@@ -19,9 +19,7 @@ import java.util.List;
 public class Path {
 
     /**
-     * Create a new path that goes through the given list of nodes (in order),
-     * choosing the fastest route if multiple are available.
-     * 
+     * Create a new path that goes 
      * @param graph Graph containing the nodes in the list.
      * @param nodes List of nodes to build the path.
      * 
@@ -210,11 +208,15 @@ public class Path {
      * 
      * @return Total length of the path (in meters).
      * 
-     * @deprecated Need to be implemented.
      */
     public float getLength() {
-        // TODO:
-        return 0;
+        float total_length = 0;
+        for (int i = 0; i < this.arcs.size(); i++)
+        {
+        	total_length =  total_length + this.arcs.get(i).getLength();
+        }
+
+        return total_length;
     }
 
     /**
