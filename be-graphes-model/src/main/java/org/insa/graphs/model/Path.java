@@ -28,12 +28,29 @@ public class Path {
      * @throws IllegalArgumentException If the list of nodes is not valid, i.e. two
      *         consecutive nodes in the list are not connected in the graph.
      * 
-     * @deprecated Need to be implemented.
      */
     public static Path createFastestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
-        // TODO:
+        for (int i=0; i<nodes.size()-1;i++) {
+            double Temps = Double.MAX_VALUE;
+            int indiceArc = -1;
+        	for (int j=0; j<nodes.get(i).getNumberOfSuccessors();j++) {
+        		if (nodes.get(i+1).equals(nodes.get(i).getSuccessors().get(j).getDestination())) {
+        			if (nodes.get(i).getSuccessors().get(j).getMinimumTravelTime()<Temps) {
+        				Temps = nodes.get(i).getSuccessors().get(j).getMinimumTravelTime();
+        				indiceArc = j;
+        			}
+        		}
+        	}
+        	if(indiceArc==-1) {throw new IllegalArgumentException();}
+        	arcs.add(nodes.get(i).getSuccessors().get(indiceArc));
+        }
+        
+        if (nodes.size()==0) {return new Path(graph);}
+        else if (nodes.size()==1) {return new Path(graph, nodes.get(0));}
+       		
+        
         return new Path(graph, arcs);
     }
 
@@ -49,14 +66,32 @@ public class Path {
      * @throws IllegalArgumentException If the list of nodes is not valid, i.e. two
      *         consecutive nodes in the list are not connected in the graph.
      * 
-     * @deprecated Need to be implemented.
      */
+	
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
-        List<Arc> arcs = new ArrayList<Arc>();
-        // TODO:
-        return new Path(graph, arcs);
-    }
+    	 List<Arc> arcs = new ArrayList<Arc>();
+         for (int i=0; i<nodes.size()-1;i++) {
+             float Distance = Float.MAX_VALUE;
+             int indiceArc = -1;
+         	for (int j=0; j<nodes.get(i).getNumberOfSuccessors();j++) {
+         		if (nodes.get(i+1).equals(nodes.get(i).getSuccessors().get(j).getDestination())) {
+         			if (nodes.get(i).getSuccessors().get(j).getLength()<Distance) {
+         				Distance = nodes.get(i).getSuccessors().get(j).getLength();
+         				indiceArc = j;
+         			}
+         		}
+         	}
+         	if(indiceArc==-1) {throw new IllegalArgumentException();}
+         	arcs.add(nodes.get(i).getSuccessors().get(indiceArc));
+         }
+         
+         if (nodes.size()==0) {return new Path(graph);}
+         else if (nodes.size()==1) {return new Path(graph, nodes.get(0));}
+        		
+         
+         return new Path(graph, arcs);
+     }
 
     /**
      * Concatenate the given paths.
