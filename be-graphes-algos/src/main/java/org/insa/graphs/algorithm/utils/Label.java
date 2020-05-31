@@ -7,34 +7,34 @@ import org.insa.graphs.model.*;
 
 public class Label implements Comparable<Label> {
     
-	private boolean marked; 
+	private boolean marque; 
 	private boolean inTas; 
+	private Node pere;
+	protected float cout;
 	private Node node;
-	private Node father;
-	protected float cost;
 
 	/* ___________________________CONSTRUCTEUR____________________________________ */
 	
 	public Label(Node noeud){
-		this.marked = false;
+		this.marque = false;
 		this.inTas = false;
 		this.node = noeud;
-		this.father = null; 
-		this.cost = Float.POSITIVE_INFINITY;
+		this.pere = null; 
+		this.cout = Float.POSITIVE_INFINITY;
 	}
 	
 	/* ______________________________SETTER_________________________________ */
 	
+	public void setPere(Node father) {
+		this.pere = father;
+	}
+	
+	public void setCout(float cout) {
+		this.cout = cout;
+	}
+	
 	public void setMark() {
-		this.marked = true;
-	}
-	
-	public void setFather(Node father) {
-		this.father = father;
-	}
-	
-	public void setCost(float cost) {
-		this.cost = cost;
+		this.marque = true;
 	}
 	
 	public void setInTas() {
@@ -45,37 +45,38 @@ public class Label implements Comparable<Label> {
 
 	
 	public boolean getMark() {
-		return this.marked;
+		return this.marque;
 	}
 	
-	public Node getFather() {
-		return this.father;
-	}
-	
-	public float getCost() {
-		return this.cost;
-	}
-	
-	public Node getNode() {
-		return this.node;
+	public Node getPere() {
+		return this.pere;
 	}
 
 	public boolean getInTas() {
 		return this.inTas;
 	}	
 	
-	public float getTotalCost() {
-		return this.cost;
+	public float getTotalCout() {
+		return this.cout;
 	} 
+	
+	public float getCout() {
+		return this.cout;
+	}
+	
+	public Node getNode() {
+		return this.node;
+	}
+
 	
 	/* ______________________METHODE COMPARAISON COUT_________________________________________ */
 	
 	public int compareTo(Label autre) {
 		int resultat;
-		if (this.getTotalCost() < autre.getTotalCost()) {
+		if (this.getTotalCout() < autre.getTotalCout()) {
 			resultat = -1;
 		}
-		else if (this.getTotalCost() == autre.getTotalCost()) {
+		else if (this.getTotalCout() == autre.getTotalCout()) {
 			resultat = 0;
 		}
 		else {

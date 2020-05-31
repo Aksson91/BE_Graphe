@@ -38,7 +38,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         tableauDeLabels[data.getOrigin().getId()] = nouveauLabel(data.getOrigin(), data); //on met le label correspondant au noeud d'origine du graph dans la premiere case du tableau 
         tasDeLabels.insert(tableauDeLabels[data.getOrigin().getId()]); //on insere dans la tas de label le label correspond au noeud origine 
         tableauDeLabels[data.getOrigin().getId()].setInTas(); //le label est maintenant dans le tas donc setintas
-        tableauDeLabels[data.getOrigin().getId()].setCost(0); //on met le cout à 0
+        tableauDeLabels[data.getOrigin().getId()].setCout(0); //on met le cout à 0
         
         // Notify observers about the first event (origin processed).
         notifyOriginProcessed(data.getOrigin());
@@ -52,7 +52,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         	
         	// check si le noeud du label actuel correspond au noeud destination
         	if (current.getNode() == data.getDestination()) {
-        		Finalcost = current.getCost(); //cout final correspond au cout du label actuel
+        		Finalcost = current.getCout(); //cout final correspond au cout du label actuel
         		resultatFinal = true; //on sort du while
         	}
         	
@@ -72,10 +72,10 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         			
         			//mettre a jour le cout
        			
-        			if (tableauDeLabels[arc.getDestination().getId()].getCost() > current.getCost() + data.getCost(arc)) {
-        				tableauDeLabels[arc.getDestination().getId()].setCost(current.getCost() + (float) data.getCost(arc));
+        			if (tableauDeLabels[arc.getDestination().getId()].getCout() > current.getCout() + data.getCost(arc)) {
+        				tableauDeLabels[arc.getDestination().getId()].setCout(current.getCout() + (float) data.getCost(arc));
         				
-        				tableauDeLabels[arc.getDestination().getId()].setFather(current.getNode()); // set le noeud pere
+        				tableauDeLabels[arc.getDestination().getId()].setPere(current.getNode()); // set le noeud pere
         				
         				//si le label est dans le tas on l'enleve du tas sinon on le met dans le tas
         				if (tableauDeLabels[arc.getDestination().getId()].getInTas()) { 
