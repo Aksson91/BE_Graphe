@@ -11,7 +11,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 	private float Finalcost; //cte coutfinal
 	
 	
-	protected Label newLabel(Node node, ShortestPathData data) {
+	protected Label nouveauLabel(Node node, ShortestPathData data) {
 		return new Label(node); 
 	} //methode création de label
 	
@@ -35,7 +35,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         
         //phase initialisation du label 
         
-        tableauDeLabels[data.getOrigin().getId()] = newLabel(data.getOrigin(), data); //on met le label correspondant au noeud d'origine du graph dans la premiere case du tableau 
+        tableauDeLabels[data.getOrigin().getId()] = nouveauLabel(data.getOrigin(), data); //on met le label correspondant au noeud d'origine du graph dans la premiere case du tableau 
         tasDeLabels.insert(tableauDeLabels[data.getOrigin().getId()]); //on insere dans la tas de label le label correspond au noeud origine 
         tableauDeLabels[data.getOrigin().getId()].setInTas(); //le label est maintenant dans le tas donc setintas
         tableauDeLabels[data.getOrigin().getId()].setCost(0); //on met le cout à 0
@@ -65,7 +65,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         		
         		if (tableauDeLabels[arc.getDestination().getId()] == null) {
         			notifyNodeReached(arc.getDestination()); // Notify observers le label du noeud destination est crée
-        			tableauDeLabels[arc.getDestination().getId()] = newLabel(arc.getDestination(), data); //label destination
+        			tableauDeLabels[arc.getDestination().getId()] = nouveauLabel(arc.getDestination(), data); //label destination
         		}
 
         		if (tableauDeLabels[arc.getDestination().getId()].getMark() == false) { //si le label destination n'est pas encore marqué
